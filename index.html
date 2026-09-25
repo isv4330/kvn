@@ -4,47 +4,127 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Обновление настроек</title>
+<title>Настройка</title>
 <style>
-  :root { --navy:#14324f; --blue:#1d5c8f; --ok:#237a4b; --line:#dbe3ec; --dim:#6b7686; }
+  :root { --navy:#14324f; --blue:#1d5c8f; --ok:#237a4b; --warn:#b3452e;
+          --line:#dbe3ec; --dim:#6b7686; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:-apple-system,"Segoe UI",Roboto,sans-serif; color:#182030;
-         background:#f4f7fa; padding:24px 16px; line-height:1.5; }
-  .card { max-width:430px; margin:0 auto; background:#fff; border-radius:16px;
-          padding:22px 20px; box-shadow:0 2px 14px rgba(20,50,79,.10); }
-  h1 { font-size:20px; color:var(--navy); margin-bottom:6px; }
-  .sub { color:var(--dim); font-size:14px; margin-bottom:18px; }
+         background:#f4f7fa; padding:20px 14px 40px; line-height:1.5; }
+  .card { max-width:440px; margin:0 auto 14px; background:#fff; border-radius:16px;
+          padding:18px 18px; box-shadow:0 2px 12px rgba(20,50,79,.08); }
+  h1 { font-size:20px; color:var(--navy); }
+  .sub { color:var(--dim); font-size:14px; margin-top:4px; }
+  .step { display:flex; gap:12px; margin-top:6px; }
+  .n { flex:0 0 26px; height:26px; border-radius:50%; background:var(--navy);
+       color:#fff; font-weight:700; text-align:center; line-height:26px; }
+  .n.ok { background:var(--ok); }
+  .body { flex:1; }
+  h2 { font-size:16px; color:var(--navy); margin-bottom:6px; }
   .btn { display:block; text-align:center; background:var(--blue); color:#fff;
-         text-decoration:none; font-weight:700; font-size:17px; border-radius:12px;
-         padding:14px; margin:14px 0 22px; }
-  ol { margin-left:20px; }
-  li { margin:10px 0; }
-  b { color:var(--navy); }
-  .res { color:var(--ok); font-weight:600; }
-  .note { margin-top:18px; padding-top:12px; border-top:1px solid var(--line);
-          font-size:13px; color:var(--dim); }
+         text-decoration:none; font-weight:700; font-size:16px; border-radius:11px;
+         padding:13px; margin:10px 0 6px; }
+  .hint { font-size:13px; color:var(--dim); }
+  .warn { color:var(--warn); font-weight:700; }
+  .keywarn { background:var(--warn); color:#fff; border-radius:8px; padding:8px 12px;
+             font-size:13px; margin-top:8px; }
+  table { border-collapse:collapse; width:100%; margin:8px 0 4px; font-size:14px; }
+  td { border:1px solid var(--line); padding:6px 10px; }
+  td:last-child { font-weight:700; color:var(--warn); font-family:ui-monospace,monospace; }
+  .check { margin:6px 0; font-size:15px; }
+  .check b { color:var(--ok); }
+  a { color:var(--blue); }
+  #keystep { display:none; }
+  .note { font-size:13px; color:var(--dim); margin-top:10px; padding-top:10px;
+          border-top:1px solid var(--line); }
 </style>
 </head>
 <body>
+
 <div class="card">
-  <h1>Обновление настроек</h1>
-  <div class="sub">Займёт одну минуту. Открой эту страницу на телефоне, где стоит Happ.</div>
-
-  <a class="btn" href="happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vTG95YWxzb2xkaWVyL3YycmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCAiR2VvaXB1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL0xveWFsc29sZGllci92MnJheS1ydWxlcy1kYXQvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL2dlb2lwLmRhdCIsICJEaXJlY3RTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1ydSIsICJkb21haW46bWF4LnJ1IiwgImRvbWFpbjpvbmVtZS5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiXSwgIlByb3h5U2l0ZXMiOiBbXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEifQ==">1. Нажми — откроется Happ</a>
-
-  <ol start="2">
-    <li>Happ спросит про новый профиль — <b>разрешить</b>. Появится профиль
-        «KVN Russia Direct».</li>
-    <li>В Happ: <b>Настройки → Маршрутизация</b> — поставь точку на
-        <b>новый</b> профиль (нижний в списке).</li>
-    <li>Выключи и снова включи подключение.</li>
-  </ol>
-
-  <p style="margin-top:14px" class="res">Проверка: Max открывается без плашки,
-  звонки идут — ничего выключать не нужно.</p>
-
-  <div class="note">Кнопка не сработала — проверь, что Happ установлен,
-  и нажми ещё раз. Не помогло — напиши тому, кто выдал доступ.</div>
+  <h1 id="title">Обновление настроек</h1>
+  <div class="sub" id="subtitle">Открой эту страницу на телефоне, где стоит Happ,
+  и пройди шаги сверху вниз.</div>
 </div>
+
+<div class="card" id="installstep">
+  <div class="step"><div class="n">1</div><div class="body">
+    <h2>Установить Happ</h2>
+    <a class="btn" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215">Открыть в App Store</a>
+    <div class="hint">Уже стоит — пропускай. При первом запуске разрешить
+    добавление конфигурации.</div>
+  </div></div>
+</div>
+
+<div class="card" id="keystep">
+  <div class="step"><div class="n">2</div><div class="body">
+    <h2>Добавить твой ключ</h2>
+    <a class="btn" id="keybtn" href="#">Добавить ключ в Happ</a>
+    <div class="hint">Happ откроется сам, в списке появится профиль.</div>
+    <div class="keywarn">Ключ личный — никому не пересылай ни ссылку на эту
+    страницу, ни ключ. У кого ключ, тот ходит в интернет от твоего имени.</div>
+  </div></div>
+</div>
+
+<div class="card" id="fragstep">
+  <div class="step"><div class="n">3</div><div class="body">
+    <h2>Фрагментация <span class="warn">— обязательно</span></h2>
+    <div class="hint">Happ → Настройки → «Использовать фрагментирование» →
+    включить и выставить 5 значений. Без этого на мобильном интернете не
+    заработает.</div>
+    <table>
+      <tr><td>Тип</td><td>Xray</td></tr>
+      <tr><td>Кол-во пакетов</td><td>tlshello</td></tr>
+      <tr><td>Длина фрагмента (мин.-макс.)</td><td>50-100</td></tr>
+      <tr><td>Задержка фр-ции (мин.-макс.)</td><td>10-20</td></tr>
+      <tr><td>Макс. кол-во фрагментов</td><td>3-6</td></tr>
+    </table>
+  </div></div>
+</div>
+
+<div class="card">
+  <div class="step"><div class="n" id="routenum">4</div><div class="body">
+    <h2>Маршруты</h2>
+    <a class="btn" href="happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vTG95YWxzb2xkaWVyL3YycmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCAiR2VvaXB1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL0xveWFsc29sZGllci92MnJheS1ydWxlcy1kYXQvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL2dlb2lwLmRhdCIsICJEaXJlY3RTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1ydSIsICJkb21haW46bWF4LnJ1IiwgImRvbWFpbjpvbmVtZS5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiXSwgIlByb3h5U2l0ZXMiOiBbXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEifQ==">Настроить маршруты</a>
+    <div class="hint">Happ создаст профиль «KVN Russia Direct» (справочники
+    ~27 МБ скачаются сами). Потом проверь: Настройки → Маршрутизация —
+    «Использовать роутинг» включён, точка на этом профиле (если профилей два —
+    на новом, старый удали).</div>
+  </div></div>
+</div>
+
+<div class="card">
+  <div class="step"><div class="n ok" id="checknum">5</div><div class="body">
+    <h2>Перезапустить и проверить</h2>
+    <div class="hint">Выключи и включи подключение в Happ, затем:</div>
+    <div class="check">☐ <a href="https://2ip.ru">2ip.ru</a> — <b>адрес твоего
+    оператора</b>, не 188.225.х.х и не 46.19.х.х</div>
+    <div class="check">☐ <a href="https://youtube.com">YouTube</a> —
+    <b>открывается</b></div>
+    <div class="check">☐ Max — <b>работает без плашки</b>, звонки идут</div>
+    <div class="note">Что-то не так — напиши тому, кто дал эту ссылку,
+    и время попытки.</div>
+  </div></div>
+</div>
+
+<script>
+(function () {
+  var h = "";
+  try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { h = location.hash.slice(1); }
+  if (h.indexOf("vless://") === 0) {
+    document.getElementById("keybtn").href = h;
+    document.getElementById("keystep").style.display = "block";
+    document.getElementById("title").textContent = "Подключение";
+    document.getElementById("subtitle").textContent =
+      "Твоя персональная настройка. Открой на телефоне и пройди шаги сверху вниз — минут десять.";
+  } else {
+    // режим «обновление»: без ключа шаги 1 и фрагментация уже сделаны
+    document.getElementById("installstep").style.display = "none";
+    document.getElementById("fragstep").style.display = "none";
+    document.getElementById("routenum").textContent = "1";
+    document.getElementById("checknum").textContent = "2";
+  }
+})();
+</script>
 </body>
 </html>
