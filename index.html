@@ -166,7 +166,11 @@
   var h = "";
   try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { h = location.hash.slice(1); }
   if (h.indexOf("vless://") === 0) {
-    document.getElementById("keybtn").href = h;
+    // happ://add/<base64> вместо голого vless://: схему vless:// заявляют
+    // и Shadowrocket с V2Box, iOS отдаёт ссылку кому попало; happ:// знает
+    // только Happ. btoa упадёт лишь на не-ASCII — тогда откат на vless.
+    var kb = document.getElementById("keybtn");
+    try { kb.href = "happ://add/" + btoa(h); } catch (e) { kb.href = h; }
     document.getElementById("keystep").style.display = "block";
     document.getElementById("title").textContent = "Подключение";
     document.getElementById("subtitle").textContent =
