@@ -98,8 +98,12 @@
 
 <div class="card" id="keystep">
   <div class="head"><div class="num">2</div><h2>Добавить твой ключ</h2></div>
-  <a class="btn" id="keybtn" href="#">Добавить ключ в Happ</a>
-  <p class="text">Happ откроется сам, в списке появится твой профиль.</p>
+  <a class="btn" id="keybtn" href="#">Скопировать ключ</a>
+  <div id="keynext" style="display:none">
+    <a class="btn" href="happ://">Открыть Happ</a>
+    <p class="text">Happ заметит ключ и предложит добавить — согласись.
+    Не предложил? Нажми в Happ <b>«+»</b> → <b>вставить из буфера</b>.</p>
+  </div>
   <div class="alert red"><b>Ключ личный.</b> Не пересылай никому ни ключ,
   ни ссылку на эту страницу: у кого ключ — тот ходит в интернет от твоего
   имени.</div>
@@ -166,11 +170,30 @@
   var h = "";
   try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { h = location.hash.slice(1); }
   if (h.indexOf("vless://") === 0) {
-    // happ://add/<base64> вместо голого vless://: схему vless:// заявляют
-    // и Shadowrocket с V2Box, iOS отдаёт ссылку кому попало; happ:// знает
-    // только Happ. btoa упадёт лишь на не-ASCII — тогда откат на vless.
+    // Ключ отдаём через буфер обмена, не ссылкой: схему vless:// заявляют
+    // и Shadowrocket с V2Box (iOS отдаёт ссылку кому попало), а happ://add
+    // принимает только URL подписки, не сам ключ. Happ распознаёт ключ
+    // из буфера при открытии — это официальный путь.
     var kb = document.getElementById("keybtn");
-    try { kb.href = "happ://add/" + btoa(h); } catch (e) { kb.href = h; }
+    kb.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var done = function () {
+        kb.textContent = "Ключ скопирован ✓";
+        document.getElementById("keynext").style.display = "block";
+      };
+      var fallback = function () {
+        var ta = document.createElement("textarea");
+        ta.value = h;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(h).then(done, fallback);
+      } else { fallback(); }
+    });
     document.getElementById("keystep").style.display = "block";
     document.getElementById("title").textContent = "Подключение";
     document.getElementById("subtitle").textContent =
