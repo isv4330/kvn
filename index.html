@@ -6,107 +6,161 @@
 <meta name="robots" content="noindex">
 <title>Настройка</title>
 <style>
-  :root { --navy:#14324f; --blue:#1d5c8f; --ok:#237a4b; --warn:#b3452e;
-          --line:#dbe3ec; --dim:#6b7686; }
+  :root { --navy:#14324f; --blue:#1d5c8f; --ok:#1e7a48; --okbg:#e9f6ee;
+          --warn:#b3452e; --warnbg:#fdf1ee; --line:#e3e9f0; --dim:#75808f;
+          --ink:#1c2433; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:-apple-system,"Segoe UI",Roboto,sans-serif; color:#182030;
-         background:#f4f7fa; padding:20px 14px 40px; line-height:1.5; }
-  .card { max-width:440px; margin:0 auto 14px; background:#fff; border-radius:16px;
-          padding:18px 18px; box-shadow:0 2px 12px rgba(20,50,79,.08); }
-  h1 { font-size:20px; color:var(--navy); }
-  .sub { color:var(--dim); font-size:14px; margin-top:4px; }
-  .step { display:flex; gap:12px; margin-top:6px; }
-  .n { flex:0 0 26px; height:26px; border-radius:50%; background:var(--navy);
-       color:#fff; font-weight:700; text-align:center; line-height:26px; }
-  .n.ok { background:var(--ok); }
-  .body { flex:1; }
-  h2 { font-size:16px; color:var(--navy); margin-bottom:6px; }
-  .btn { display:block; text-align:center; background:var(--blue); color:#fff;
-         text-decoration:none; font-weight:700; font-size:16px; border-radius:11px;
-         padding:13px; margin:10px 0 6px; }
-  .hint { font-size:13px; color:var(--dim); }
-  .warn { color:var(--warn); font-weight:700; }
-  .keywarn { background:var(--warn); color:#fff; border-radius:8px; padding:8px 12px;
-             font-size:13px; margin-top:8px; }
-  table { border-collapse:collapse; width:100%; margin:8px 0 4px; font-size:14px; }
-  td { border:1px solid var(--line); padding:6px 10px; }
-  td:last-child { font-weight:700; color:var(--warn); font-family:ui-monospace,monospace; }
-  .check { margin:6px 0; font-size:15px; }
-  .check b { color:var(--ok); }
+  body { font-family:-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink);
+         background:#eef2f7; padding:18px 14px 48px; line-height:1.55;
+         font-size:16px; -webkit-text-size-adjust:100%; }
+  .wrap { max-width:460px; margin:0 auto; }
+
+  .hero { background:linear-gradient(135deg,#14324f,#1d5c8f); color:#fff;
+          border-radius:18px; padding:22px 20px; margin-bottom:16px; }
+  .hero h1 { font-size:23px; line-height:1.2; }
+  .hero p { margin-top:8px; font-size:15px; opacity:.85; line-height:1.5; }
+
+  .card { background:#fff; border-radius:18px; padding:18px 18px 20px;
+          margin-bottom:14px; box-shadow:0 1px 4px rgba(20,50,79,.07); }
+  .head { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .num { flex:0 0 30px; height:30px; border-radius:50%; background:var(--navy);
+         color:#fff; font-weight:700; font-size:16px; text-align:center;
+         line-height:30px; }
+  .num.green { background:var(--ok); }
+  h2 { font-size:18px; color:var(--navy); line-height:1.25; }
+  h2 small { display:block; font-size:13px; font-weight:400; color:var(--dim); }
+
+  .btn { display:flex; align-items:center; justify-content:center; gap:8px;
+         background:var(--blue); color:#fff; text-decoration:none; font-weight:600;
+         font-size:16px; border-radius:13px; padding:15px; margin:4px 0 12px;
+         box-shadow:0 2px 6px rgba(29,92,143,.25); }
+  .btn::after { content:"›"; font-size:20px; line-height:1; opacity:.7; }
+
+  p.text { font-size:15px; margin:8px 0; }
+  p.mut { font-size:14px; color:var(--dim); margin:8px 0 0; }
+
+  ol.sub { list-style:none; counter-reset:s; margin-top:10px; }
+  ol.sub li { counter-increment:s; position:relative; padding:9px 0 9px 38px;
+              font-size:15px; border-top:1px solid var(--line); }
+  ol.sub li:first-child { border-top:none; }
+  ol.sub li::before { content:counter(s); position:absolute; left:0; top:8px;
+        width:24px; height:24px; border-radius:50%; background:#eef2f7;
+        color:var(--navy); font-weight:700; font-size:13px; text-align:center;
+        line-height:24px; }
+  b { color:var(--navy); }
+
+  .alert { border-radius:12px; padding:11px 14px; font-size:14px; margin:10px 0 0;
+           line-height:1.5; }
+  .alert.red { background:var(--warnbg); color:#7c2d1a;
+               border-left:4px solid var(--warn); }
+  .alert.red b { color:var(--warn); }
+
+  .params { width:100%; border-collapse:separate; border-spacing:0;
+            margin-top:12px; font-size:15px; border:1px solid var(--line);
+            border-radius:12px; overflow:hidden; }
+  .params td { padding:10px 14px; border-top:1px solid var(--line); }
+  .params tr:first-child td { border-top:none; }
+  .params tr:nth-child(even) td { background:#f7f9fc; }
+  .params td:last-child { text-align:right; font-weight:700; color:var(--warn);
+        font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:14px;
+        white-space:nowrap; }
+
+  .checks { margin-top:6px; }
+  .chk { display:flex; gap:12px; align-items:flex-start; padding:11px 0;
+         border-top:1px solid var(--line); font-size:15px; }
+  .chk:first-child { border-top:none; }
+  .chk .tick { flex:0 0 26px; height:26px; border-radius:50%;
+        background:var(--okbg); color:var(--ok); font-weight:700;
+        text-align:center; line-height:26px; font-size:15px; }
+  .chk b { color:var(--ok); }
+
+  .foot { text-align:center; font-size:13px; color:var(--dim); margin-top:6px;
+          line-height:1.6; }
   a { color:var(--blue); }
   #keystep { display:none; }
-  .note { font-size:13px; color:var(--dim); margin-top:10px; padding-top:10px;
-          border-top:1px solid var(--line); }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<div class="card">
+<div class="hero">
   <h1 id="title">Обновление настроек</h1>
-  <div class="sub" id="subtitle">Открой эту страницу на телефоне, где стоит Happ,
-  и пройди шаги сверху вниз.</div>
+  <p id="subtitle">Открой эту страницу на телефоне, где установлен Happ,
+  и пройди шаги сверху вниз.</p>
 </div>
 
 <div class="card" id="installstep">
-  <div class="step"><div class="n">1</div><div class="body">
-    <h2>Установить Happ</h2>
-    <a class="btn" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215">Открыть в App Store</a>
-    <div class="hint">Уже стоит — пропускай. При первом запуске разрешить
-    добавление конфигурации.</div>
-  </div></div>
+  <div class="head"><div class="num">1</div><h2>Установить Happ</h2></div>
+  <a class="btn" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215">Открыть в App Store</a>
+  <p class="mut">Уже установлен — пропускай этот шаг. При первом запуске
+  Happ попросит разрешение добавить конфигурацию — разреши.</p>
 </div>
 
 <div class="card" id="keystep">
-  <div class="step"><div class="n">2</div><div class="body">
-    <h2>Добавить твой ключ</h2>
-    <a class="btn" id="keybtn" href="#">Добавить ключ в Happ</a>
-    <div class="hint">Happ откроется сам, в списке появится профиль.</div>
-    <div class="keywarn">Ключ личный — никому не пересылай ни ссылку на эту
-    страницу, ни ключ. У кого ключ, тот ходит в интернет от твоего имени.</div>
-  </div></div>
+  <div class="head"><div class="num">2</div><h2>Добавить твой ключ</h2></div>
+  <a class="btn" id="keybtn" href="#">Добавить ключ в Happ</a>
+  <p class="text">Happ откроется сам, в списке появится твой профиль.</p>
+  <div class="alert red"><b>Ключ личный.</b> Не пересылай никому ни ключ,
+  ни ссылку на эту страницу: у кого ключ — тот ходит в интернет от твоего
+  имени.</div>
 </div>
 
 <div class="card" id="fragstep">
-  <div class="step"><div class="n">3</div><div class="body">
-    <h2>Фрагментация <span class="warn">— обязательно</span></h2>
-    <div class="hint">Happ → Настройки → «Использовать фрагментирование» →
-    включить и выставить 5 значений. Без этого на мобильном интернете не
-    заработает.</div>
-    <table>
-      <tr><td>Тип</td><td>Xray</td></tr>
-      <tr><td>Кол-во пакетов</td><td>tlshello</td></tr>
-      <tr><td>Длина фрагмента (мин.-макс.)</td><td>50-100</td></tr>
-      <tr><td>Задержка фр-ции (мин.-макс.)</td><td>10-20</td></tr>
-      <tr><td>Макс. кол-во фрагментов</td><td>3-6</td></tr>
-    </table>
-  </div></div>
+  <div class="head"><div class="num">3</div>
+    <h2>Включить фрагментацию<small>без неё мобильный интернет не заработает</small></h2>
+  </div>
+  <ol class="sub">
+    <li>Открой: Happ → <b>Настройки</b>.</li>
+    <li>Включи переключатель <b>«Использовать фрагментирование»</b>.</li>
+    <li>Выставь пять значений точно по таблице:</li>
+  </ol>
+  <table class="params">
+    <tr><td>Тип</td><td>Xray</td></tr>
+    <tr><td>Кол-во пакетов</td><td>tlshello</td></tr>
+    <tr><td>Длина фрагмента (мин.-макс.)</td><td>50-100</td></tr>
+    <tr><td>Задержка фр-ции (мин.-макс.)</td><td>10-20</td></tr>
+    <tr><td>Макс. кол-во фрагментов</td><td>3-6</td></tr>
+  </table>
 </div>
 
 <div class="card">
-  <div class="step"><div class="n" id="routenum">4</div><div class="body">
-    <h2>Маршруты</h2>
-    <a class="btn" href="happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vTG95YWxzb2xkaWVyL3YycmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCAiR2VvaXB1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL0xveWFsc29sZGllci92MnJheS1ydWxlcy1kYXQvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL2dlb2lwLmRhdCIsICJEaXJlY3RTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1ydSIsICJkb21haW46bWF4LnJ1IiwgImRvbWFpbjpvbmVtZS5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiXSwgIlByb3h5U2l0ZXMiOiBbXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEifQ==">Настроить маршруты</a>
-    <div class="hint">Happ создаст профиль «KVN Russia Direct» (справочники
-    ~27 МБ скачаются сами). Потом проверь: Настройки → Маршрутизация —
-    «Использовать роутинг» включён, точка на этом профиле (если профилей два —
-    на новом, старый удали).</div>
-  </div></div>
+  <div class="head"><div class="num" id="routenum">4</div>
+    <h2>Настроить маршруты<small>российское — напрямую, остальное — через сервис</small></h2>
+  </div>
+  <a class="btn" href="happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL2dpdGh1Yi5jb20vTG95YWxzb2xkaWVyL3YycmF5LXJ1bGVzLWRhdC9yZWxlYXNlcy9sYXRlc3QvZG93bmxvYWQvZ2Vvc2l0ZS5kYXQiLCAiR2VvaXB1cmwiOiAiaHR0cHM6Ly9naXRodWIuY29tL0xveWFsc29sZGllci92MnJheS1ydWxlcy1kYXQvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL2dlb2lwLmRhdCIsICJEaXJlY3RTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1ydSIsICJkb21haW46bWF4LnJ1IiwgImRvbWFpbjpvbmVtZS5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiXSwgIlByb3h5U2l0ZXMiOiBbXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEifQ==">Настроить маршруты</a>
+  <p class="text">Happ сам создаст профиль <b>«KVN Russia Direct»</b>
+  и докачает нужное (~27 МБ, минута-две).</p>
+  <p class="text" style="margin-top:12px">Потом проверь три вещи:</p>
+  <ol class="sub">
+    <li>Открой: <b>Настройки → Маршрутизация</b>.</li>
+    <li>Переключатель <b>«Использовать роутинг»</b> — включён.</li>
+    <li>Точка стоит на <b>«KVN Russia Direct»</b>. Профилей два? Выбери
+        нижний, новый. Старый смахни влево и удали.</li>
+  </ol>
 </div>
 
 <div class="card">
-  <div class="step"><div class="n ok" id="checknum">5</div><div class="body">
-    <h2>Перезапустить и проверить</h2>
-    <div class="hint">Выключи и включи подключение в Happ, затем:</div>
-    <div class="check">☐ <a href="https://2ip.ru">2ip.ru</a> — <b>адрес твоего
-    оператора</b>, не 188.225.х.х и не 46.19.х.х</div>
-    <div class="check">☐ <a href="https://youtube.com">YouTube</a> —
-    <b>открывается</b></div>
-    <div class="check">☐ Max — <b>работает без плашки</b>, звонки идут</div>
-    <div class="note">Что-то не так — напиши тому, кто дал эту ссылку,
-    и время попытки.</div>
-  </div></div>
+  <div class="head"><div class="num green" id="checknum">5</div>
+    <h2>Перезапустить и проверить</h2></div>
+  <p class="text">Выключи и снова включи подключение в Happ. Дальше три
+  проверки — всё сошлось, значит готово:</p>
+  <div class="checks">
+    <div class="chk"><div class="tick">✓</div>
+      <div><a href="https://2ip.ru">2ip.ru</a> показывает <b>адрес твоего
+      оператора</b> — не 188.225.х.х и не 46.19.х.х</div></div>
+    <div class="chk"><div class="tick">✓</div>
+      <div><a href="https://youtube.com">YouTube</a> <b>открывается</b></div></div>
+    <div class="chk"><div class="tick">✓</div>
+      <div>Max <b>работает без плашки</b>, звонки идут</div></div>
+  </div>
+  <p class="mut">Что-то не сходится — напиши тому, кто дал эту ссылку,
+  и время попытки.</p>
 </div>
 
+<p class="foot" id="footer">Страница показывает свежие настройки —
+возвращайся по этой же ссылке, когда попросят обновиться.</p>
+
+</div>
 <script>
 (function () {
   var h = "";
@@ -116,9 +170,10 @@
     document.getElementById("keystep").style.display = "block";
     document.getElementById("title").textContent = "Подключение";
     document.getElementById("subtitle").textContent =
-      "Твоя персональная настройка. Открой на телефоне и пройди шаги сверху вниз — минут десять.";
+      "Твоя персональная настройка: пять шагов, минут десять. Открой на телефоне и иди сверху вниз.";
+    document.getElementById("footer").textContent =
+      "Ссылка персональная — сохрани её: пригодится при обновлениях.";
   } else {
-    // режим «обновление»: без ключа шаги 1 и фрагментация уже сделаны
     document.getElementById("installstep").style.display = "none";
     document.getElementById("fragstep").style.display = "none";
     document.getElementById("routenum").textContent = "1";
