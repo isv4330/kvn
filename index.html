@@ -78,6 +78,13 @@
           line-height:1.6; }
   a { color:var(--blue); }
   #keystep { display:none; }
+  button.btn { width:100%; border:0; cursor:pointer; font-family:inherit; }
+  button.btn::after { content:none; }
+  #routes-link { display:block; width:100%; margin:8px 0 4px; padding:10px;
+        font:12px/1.4 ui-monospace,"SF Mono",Menlo,monospace; color:var(--ink);
+        background:#f7f9fc; border:1px solid var(--line); border-radius:10px;
+        resize:none; word-break:break-all; }
+  #routes-note:empty { display:none; }
 </style>
 </head>
 <body>
@@ -132,6 +139,10 @@
     <h2>Настроить маршруты<small>российское — напрямую, остальное — через сервис</small></h2>
   </div>
   <a class="btn" href="happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL3N0YXRpYy5lbDMucnU6ODQ0My9jdXJyZW50L2dlb3NpdGUuZGF0IiwgIkdlb2lwdXJsIjogImh0dHBzOi8vc3RhdGljLmVsMy5ydTo4NDQzL2N1cnJlbnQvZ2VvaXAuZGF0IiwgIkRpcmVjdFNpdGVzIjogWyJnZW9zaXRlOmNhdGVnb3J5LXJ1IiwgImRvbWFpbjptYXgucnUiLCAiZG9tYWluOm9uZW1lLnJ1IiwgImRvbWFpbjpnb3YucnUiLCAiZG9tYWluOnQyLnJ1IiwgImRvbWFpbjp0YmFuay5ydSIsICJkb21haW46dGlua29mZi5ydSIsICJkb21haW46dGNzYmFuay5ydSIsICJkb21haW46dGlua29mZmluc3VyYW5jZS5ydSIsICJkb21haW46bXkubW9zZW5lcmdvc2J5dC5ydSIsICJkb21haW46a29udHVyLnJ1IiwgImRvbWFpbjptYWlsLmtvbnR1ci5ydSIsICJkb21haW46c3dlYi5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiLCAiMTk0LjIyMS4yNTAuMC8yNCJdLCAiUHJveHlTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1haS0hY24iLCAiZ2Vvc2l0ZTpkZWVwc2VlayIsICJkb21haW46bWlzdHJhbC5haSIsICJkb21haW46c3Vuby5jb20iLCAiZG9tYWluOm1pZGpvdXJuZXkuY29tIiwgImRvbWFpbjpjb250YWJvLmNvbSIsICJkb21haW46bGFtcGEubXgiXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEiLCAiRG9tZXN0aWNETlNUeXBlIjogIkRvVSIsICJEb21lc3RpY0ROU0lQIjogIjc3Ljg4LjguOCJ9">Настроить маршруты</a>
+  <p class="text">Если ничего не произошло: скопируй ссылку и вставь в Happ через плюс.</p>
+  <textarea id="routes-link" readonly rows="3" aria-label="Ссылка маршрутов">happ://routing/onadd/eyJOYW1lIjogIktWTiBSdXNzaWEgRGlyZWN0IiwgIkdsb2JhbFByb3h5IjogInRydWUiLCAiR2Vvc2l0ZXVybCI6ICJodHRwczovL3N0YXRpYy5lbDMucnU6ODQ0My9jdXJyZW50L2dlb3NpdGUuZGF0IiwgIkdlb2lwdXJsIjogImh0dHBzOi8vc3RhdGljLmVsMy5ydTo4NDQzL2N1cnJlbnQvZ2VvaXAuZGF0IiwgIkRpcmVjdFNpdGVzIjogWyJnZW9zaXRlOmNhdGVnb3J5LXJ1IiwgImRvbWFpbjptYXgucnUiLCAiZG9tYWluOm9uZW1lLnJ1IiwgImRvbWFpbjpnb3YucnUiLCAiZG9tYWluOnQyLnJ1IiwgImRvbWFpbjp0YmFuay5ydSIsICJkb21haW46dGlua29mZi5ydSIsICJkb21haW46dGNzYmFuay5ydSIsICJkb21haW46dGlua29mZmluc3VyYW5jZS5ydSIsICJkb21haW46bXkubW9zZW5lcmdvc2J5dC5ydSIsICJkb21haW46a29udHVyLnJ1IiwgImRvbWFpbjptYWlsLmtvbnR1ci5ydSIsICJkb21haW46c3dlYi5ydSJdLCAiRGlyZWN0SXAiOiBbImdlb2lwOnJ1IiwgIjE1NS4yMTIuMTkyLjAvMjAiLCAiMTk0LjIyMS4yNTAuMC8yNCJdLCAiUHJveHlTaXRlcyI6IFsiZ2Vvc2l0ZTpjYXRlZ29yeS1haS0hY24iLCAiZ2Vvc2l0ZTpkZWVwc2VlayIsICJkb21haW46bWlzdHJhbC5haSIsICJkb21haW46c3Vuby5jb20iLCAiZG9tYWluOm1pZGpvdXJuZXkuY29tIiwgImRvbWFpbjpjb250YWJvLmNvbSIsICJkb21haW46bGFtcGEubXgiXSwgIlByb3h5SXAiOiBbXSwgIkJsb2NrU2l0ZXMiOiBbXSwgIkJsb2NrSXAiOiBbXSwgIkRvbWFpblN0cmF0ZWd5IjogIklQSWZOb25NYXRjaCIsICJGYWtlRE5TIjogImZhbHNlIiwgIlJlbW90ZUROU1R5cGUiOiAiRG9VIiwgIlJlbW90ZUROU0lQIjogIjEuMS4xLjEiLCAiRG9tZXN0aWNETlNUeXBlIjogIkRvVSIsICJEb21lc3RpY0ROU0lQIjogIjc3Ljg4LjguOCJ9</textarea>
+  <button id="routes-copy" type="button" class="btn">Скопировать</button>
+  <p id="routes-note" class="mut" role="status"></p>
   <p class="text">Happ создаст профиль <b>«KVN Russia Direct»</b> с датой в названии
   и скачает справочники сайтов (около 27 МБ, минута-две). Подожди, пока скачается.</p>
   <p class="text" style="margin-top:12px">Потом:</p>
@@ -210,6 +221,36 @@
     document.getElementById("routenum").textContent = "1";
     document.getElementById("checknum").textContent = "2";
   }
+})();
+(function () {
+  // Запасной путь к маршрутам: на Mac ссылка happ:// молча не открывается.
+  // Копируем то, что стоит в поле: бот меняет поле и кнопку одним проходом,
+  // своей копии ссылки у скрипта нет.
+  var field = document.getElementById("routes-link");
+  var button = document.getElementById("routes-copy");
+  var note = document.getElementById("routes-note");
+  if (!field || !button) { return; }
+  var say = function (text) { if (note) { note.textContent = text; } };
+  var done = function () {
+    say("Ссылка скопирована. Открой Happ, нажми плюс и вставь её.");
+  };
+  var manual = function () {
+    var ok = false;
+    field.focus();
+    field.select();
+    field.setSelectionRange(0, field.value.length);
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    if (ok) { done(); return; }
+    say("Само не скопировалось: нажми на ссылку, она выделена, выбери «Скопировать».");
+  };
+  button.addEventListener("click", function () {
+    var text = document.getElementById("routes-link").value.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try { navigator.clipboard.writeText(text).then(done, manual); } catch (e) { manual(); }
+    } else {
+      manual();
+    }
+  });
 })();
 </script>
 </body>
